@@ -1,0 +1,153 @@
+{% if session.status == "completed" %}
+<div class="controls-body">
+  <div class="alert alert-success">
+    <span>Annotation complete!</span>
+  </div>
+  <div class="btn-row">
+    <a href="/sessions/{{ session.id }}/export" class="btn btn-primary" target="_blank">
+      Export JSON
+    </a>
+    <a href="/" class="btn btn-ghost">New Session</a>
+  </div>
+</div>
+{% else %}
+<div class="controls-body">
+  <h3 class="section-title">Annotate step</h3>
+
+  <!-- Action categories -->
+  <div class="chip-group">
+    <div class="chip-row">
+      <span class="category-label">Mouse</span>
+      <button class="action-chip" data-action="click">Click</button>
+      <button class="action-chip" data-action="hover">Hover</button>
+    </div>
+    <div class="chip-row">
+      <span class="category-label">Key</span>
+      <button class="action-chip" data-action="type">Type</button>
+      <button class="action-chip" data-action="press">Press</button>
+    </div>
+    <div class="chip-row">
+      <span class="category-label">Page</span>
+      <button class="action-chip" data-action="scroll_up">Scroll Up</button>
+      <button class="action-chip" data-action="scroll_down">Scroll Down</button>
+    </div>
+    <div class="chip-row">
+      <span class="category-label">Nav</span>
+      <button class="action-chip" data-action="goto">Go to</button>
+      <button class="action-chip" data-action="go_back">Go back</button>
+      <button class="action-chip" data-action="go_forward">Go forward</button>
+    </div>
+    <div class="chip-row">
+      <span class="category-label">End</span>
+      <button class="action-chip" data-action="finish">Finish</button>
+    </div>
+    <div class="chip-row">
+      <span class="category-label">Fix</span>
+      <button
+        class="action-chip"
+        hx-post="/sessions/{{ session.id }}/undo"
+        hx-target="#screenshot-area"
+        hx-swap="innerHTML"
+        hx-indicator="#undo-spin"
+        {% if session.actions|length == 0 %}disabled{% endif %}
+      >
+        <span id="undo-spin" class="spinner htmx-indicator"></span>
+        Undo
+      </button>
+    </div>
+  </div>
+
+  <!-- Coordinate info -->
+  <div id="coord-info" class="hidden coord-info">
+    <span class="coord-label">Coordinates:</span>
+    <span id="coord-display" class="coord-value">click on screenshot</span>
+  </div>
+
+  <!-- Parameter panels -->
+  <div id="params-click" class="param-panel hidden"></div>
+  <div id="params-hover" class="param-panel hidden"></div>
+
+  <div id="params-type" class="param-panel hidden">
+    <div class="form-group">
+      <label class="form-label">Text to type</label>
+      <input type="text" id="input-text" class="form-input" placeholder="Enter text..." />
+    </div>
+  </div>
+
+  <div id="params-press" class="param-panel hidden">
+    <div class="form-group">
+      <label class="form-label">Key</label>
+      <select id="input-key" class="form-select">
+        <option value="Enter">Enter</option>
+        <option value="Tab">Tab</option>
+        <option value="Escape">Escape</option>
+        <option value="Backspace">Backspace</option>
+        <option value="ArrowDown">Arrow Down</option>
+        <option value="ArrowUp">Arrow Up</option>
+        <option value="ArrowLeft">Arrow Left</option>
+        <option value="ArrowRight">Arrow Right</option>
+        <option value="Space">Space</option>
+        <option value="Delete">Delete</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="params-scroll_up" class="param-panel hidden"></div>
+  <div id="params-scroll_down" class="param-panel hidden"></div>
+
+  <div id="params-goto" class="param-panel hidden">
+    <div class="form-group">
+      <label class="form-label">URL</label>
+      <input type="text" id="input-goto-url" class="form-input" placeholder="https://..." />
+    </div>
+  </div>
+
+  <div id="params-go_back" class="param-panel hidden"></div>
+  <div id="params-go_forward" class="param-panel hidden"></div>
+
+  <div id="params-finish" class="param-panel hidden">
+    <div class="form-group">
+      <label class="form-label">Final answer</label>
+      <textarea id="input-answer" class="form-textarea" placeholder="What is the answer to the prompt?"></textarea>
+    </div>
+  </div>
+
+  <!-- Submit area -->
+  <div id="submit-area" class="hidden">
+    <div class="form-group">
+      <label class="form-label">Explanation</label>
+      <textarea
+        id="explanation-input"
+        class="form-textarea"
+        placeholder="Why are you performing this action?"
+        rows="2"
+      ></textarea>
+    </div>
+
+    <input type="hidden" id="action-type-input" value="" />
+    <input type="hidden" id="input-x" value="0" />
+    <input type="hidden" id="input-y" value="0" />
+
+    <button
+      class="btn btn-primary submit-btn"
+      hx-post="/sessions/{{ session.id }}/actions"
+      hx-target="#screenshot-area"
+      hx-swap="innerHTML"
+      hx-indicator="#exec-spin"
+      hx-vals="js:{
+        type: document.getElementById('action-type-input').value,
+        x: document.getElementById('input-x').value,
+        y: document.getElementById('input-y').value,
+        explanation: document.getElementById('explanation-input').value,
+        text: (document.getElementById('input-text') || {}).value || '',
+        key: (document.getElementById('input-key') || {}).value || '',
+        goto_url: (document.getElementById('input-goto-url') || {}).value || '',
+        answer: (document.getElementById('input-answer') || {}).value || ''
+      }"
+    >
+      <span id="exec-spin" class="spinner htmx-indicator"></span>
+      Execute Action
+    </button>
+  </div>
+</div>
+{% endif %}

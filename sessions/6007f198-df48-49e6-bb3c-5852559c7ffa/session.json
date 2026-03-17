@@ -1,0 +1,93 @@
+{
+  "id": "6007f198-df48-49e6-bb3c-5852559c7ffa",
+  "url": "https://lipinski.work",
+  "prompt": "send email",
+  "status": "completed",
+  "createdAt": 1773671335239,
+  "updatedAt": 1773671770480,
+  "viewportWidth": 1280,
+  "viewportHeight": 900,
+  "actions": [
+    {
+      "type": "click",
+      "x": 1226,
+      "y": 24,
+      "explanation": "click on contact btn",
+      "timestamp": 1773671355860
+    },
+    {
+      "type": "scroll_down",
+      "explanation": "scroll a bit down",
+      "timestamp": 1773671370793
+    },
+    {
+      "type": "click",
+      "x": 586,
+      "y": 172,
+      "explanation": "focus name field",
+      "timestamp": 1773671388195
+    },
+    {
+      "type": "type",
+      "text": "michal",
+      "explanation": "type name in field",
+      "timestamp": 1773671408479
+    },
+    {
+      "type": "press",
+      "key": "Tab",
+      "explanation": "go to next field",
+      "timestamp": 1773671421990
+    },
+    {
+      "type": "type",
+      "text": "michal.lipinski@gmail.com",
+      "explanation": "enter email",
+      "timestamp": 1773671449731
+    },
+    {
+      "type": "press",
+      "key": "Tab",
+      "explanation": "switch to subject field",
+      "timestamp": 1773671479857
+    },
+    {
+      "type": "type",
+      "text": "test email from automation app",
+      "explanation": "some test subject",
+      "timestamp": 1773671508328
+    },
+    {
+      "type": "press",
+      "key": "Tab",
+      "explanation": "go to msg field",
+      "timestamp": 1773671571642
+    },
+    {
+      "type": "type",
+      "text": "this is a test msg",
+      "explanation": "enter msg body",
+      "timestamp": 1773671598113
+    },
+    {
+      "type": "click",
+      "x": 935,
+      "y": 493,
+      "explanation": "click send msg btn",
+      "timestamp": 1773671624448
+    },
+    {
+      "type": "click",
+      "x": 941,
+      "y": 488,
+      "explanation": "dunno did i send it?",
+      "timestamp": 1773671726551
+    },
+    {
+      "type": "finish",
+      "answer": "it looks like it is working",
+      "explanation": "i did send mail using form.success",
+      "timestamp": 1773671770480
+    }
+  ]
+}

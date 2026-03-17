@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <link rel="stylesheet" href="https://cdn.lineicons.com/5.1/line/lineicons.css" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body class="app-body">
+    {% if not hide_navbar %}
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="/">
+          <img src="/logo.png" alt="WebOctoScribe" class="navbar-logo" />
+        </a>
+      </div>
+      <div class="navbar-actions">
+        <a href="/sessions" class="btn btn-ghost" title="Sessions">
+          <i class="lni lni-menu-hamburger-1"></i>
+          <span class="responsive-label">Sessions</span>
+        </a>
+      </div>
+    </nav>
+    {% endif %}
+    <div class="{% if not hide_navbar %}app-content{% endif %}">
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

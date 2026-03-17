@@ -1,0 +1,25 @@
+{
+  "id": "7b8ac667-0b9f-4258-9e9b-3dd783e904e4",
+  "url": "https://lipinski.work",
+  "prompt": "lkk",
+  "status": "completed",
+  "createdAt": 1773690683106,
+  "updatedAt": 1773690697023,
+  "viewportWidth": 1280,
+  "viewportHeight": 900,
+  "actions": [
+    {
+      "explanation": "lll",
+      "timestamp": 1773690688736,
+      "type": "click",
+      "x": 1217,
+      "y": 33
+    },
+    {
+      "explanation": "l",
+      "timestamp": 1773690697023,
+      "type": "finish",
+      "answer": "ll"
+    }
+  ]
+}

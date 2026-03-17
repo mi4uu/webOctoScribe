@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div
+  class="replay-container"
+  id="replay-container"
+  data-session="{{ session_data }}"
+>
+  <!-- Top bar -->
+  <div class="replay-topbar">
+    <div class="replay-topbar-left">
+      <a href="/sessions" class="btn btn-ghost">
+        <i class="lni lni-arrow-left"></i> Sessions
+      </a>
+      <div class="divider-v"></div>
+      <span class="badge-url">{{ meta.url }}</span>
+      <span class="replay-prompt">{{ prompt_truncated }}</span>
+    </div>
+    <div class="replay-controls">
+      <button id="prev-btn" class="btn btn-ghost" title="Previous (Left Arrow)">
+        <i class="lni lni-arrow-left"></i>
+      </button>
+      <button id="play-pause-btn" class="btn btn-primary">
+        <i class="lni lni-pause"></i> Pause
+      </button>
+      <button id="next-btn" class="btn btn-ghost" title="Next (Right Arrow)">
+        <i class="lni lni-arrow-right"></i>
+      </button>
+      <div class="divider-v"></div>
+      <span id="step-indicator">Step 0 of {{ screenshot_count - 1 }}</span>
+      <div class="divider-v"></div>
+      <select id="speed-select" class="replay-speed-select">
+        <option value="2000">0.5x</option>
+        <option value="1000" selected>1x</option>
+        <option value="500">2x</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Center: Screenshot -->
+  <div class="replay-center" id="screenshot-container">
+    <img id="replay-screenshot" class="replay-screenshot" alt="Loading..." />
+  </div>
+
+  <!-- Bottom: Action info + Progress -->
+  <div class="replay-bottom">
+    <div id="action-info">
+      <span class="badge badge-ghost">Initial</span>
+      <span>Starting screenshot</span>
+    </div>
+    <div class="replay-progress" id="progress-bar-container">
+      <div class="replay-progress-bar" id="progress-bar"></div>
+    </div>
+  </div>
+</div>
+<script type="module" src="/assets/replay.js"></script>
+{% endblock %}

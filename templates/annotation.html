@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div
+  class="split-layout"
+  id="app-root"
+  data-vw="{{ session.viewport_width }}"
+  data-vh="{{ session.viewport_height }}"
+>
+  <!-- LEFT: Screenshot -->
+  <div class="split-main">
+    <div class="panel-header">
+      <span class="badge-url">{{ session.url }}</span>
+      <span class="panel-step">Step {{ session.actions|length + 1 }}</span>
+    </div>
+    <div class="screenshot-area" id="screenshot-area">
+      {% include "partials/screenshot.html" %}
+    </div>
+  </div>
+
+  <!-- RIGHT: Controls -->
+  <div class="split-sidebar">
+    <div class="context-panel">
+      <h2 class="section-title">Context</h2>
+      <p class="context-label">Prompt</p>
+      <p class="context-prompt">{{ session.prompt }}</p>
+    </div>
+    <div id="action-controls">
+      {% include "partials/controls.html" %}
+    </div>
+    <div class="history-panel" id="action-history">
+      {% include "partials/history.html" %}
+    </div>
+  </div>
+</div>
+<script type="module" src="/assets/annotation.js"></script>
+{% endblock %}

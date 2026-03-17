@@ -1,0 +1,20 @@
+{% if session.actions|length == 0 %}
+<div class="history-empty">No actions recorded yet</div>
+{% else %}
+<div class="history-body">
+  <div class="history-title">
+    <h4>History ({{ session.actions|length }} steps)</h4>
+  </div>
+  <div>
+    {% for a in actions_display %}
+    <div class="step-item">
+      <div class="step-header">
+        <span class="step-number">{{ loop.index }}</span>
+        <span class="badge {{ a.badge_class }}">{{ a.label }}</span>
+      </div>
+      <p class="step-explanation">{{ a.explanation or "\u2014" }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

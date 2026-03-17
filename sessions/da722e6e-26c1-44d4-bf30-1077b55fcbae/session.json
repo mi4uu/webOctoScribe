@@ -1,0 +1,38 @@
+{
+  "id": "da722e6e-26c1-44d4-bf30-1077b55fcbae",
+  "url": "https://lipinski.work",
+  "prompt": "show contact form and type email",
+  "status": "completed",
+  "createdAt": 1773687444023,
+  "updatedAt": 1773687526193,
+  "viewportWidth": 1280,
+  "viewportHeight": 900,
+  "actions": [
+    {
+      "type": "click",
+      "x": 1214,
+      "y": 35,
+      "explanation": "click on contact btn",
+      "timestamp": 1773687464963
+    },
+    {
+      "type": "click",
+      "x": 1063,
+      "y": 536,
+      "explanation": "focus email input",
+      "timestamp": 1773687489714
+    },
+    {
+      "type": "type",
+      "text": "michal.lipinski@gmail.com",
+      "explanation": "type email",
+      "timestamp": 1773687509539
+    },
+    {
+      "type": "finish",
+      "answer": "it works",
+      "explanation": "sucess",
+      "timestamp": 1773687526193
+    }
+  ]
+}

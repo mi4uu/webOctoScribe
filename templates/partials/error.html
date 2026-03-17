@@ -1,0 +1,6 @@
+<div class="alert alert-error{{ ' alert-page' if page else '' }}{{ ' alert-inline' if inline else '' }}">
+  <span>{{ message }}</span>
+  {% if back_url %}
+  <a href="{{ back_url }}" class="btn btn-ghost">{{ back_text|default("Back") }}</a>
+  {% endif %}
+</div>

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-padded">
+  <div class="container-lg">
+    <div class="page-header">
+      <h1 class="page-title">Annotation Sessions</h1>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="col-center">#</th>
+            <th>URL</th>
+            <th>Prompt</th>
+            <th>Status</th>
+            <th class="col-center">Actions</th>
+            <th>Date</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if sessions|length == 0 %}
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">
+                <div class="empty-state-icon">
+                  <i class="lni lni-clipboard"></i>
+                </div>
+                <p>No sessions yet</p>
+                <a href="/" class="btn btn-primary">Create your first session</a>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          {% for meta in sessions %}
+          <tr>
+            <td class="col-center">{{ loop.index }}</td>
+            <td class="col-url">{{ meta.url }}</td>
+            <td>{{ meta.prompt_truncated }}</td>
+            <td>
+              {% if meta.status == "active" %}
+              <span class="badge badge-warning">Active</span>
+              {% else %}
+              <span class="badge badge-success">Completed</span>
+              {% endif %}
+            </td>
+            <td class="col-center">{{ meta.action_count }}</td>
+            <td class="col-date">{{ meta.date_str }}</td>
+            <td>
+              <div class="actions-cell">
+                {% if meta.status == "active" and meta.id in live_ids %}
+                <a
+                  href="/sessions/{{ meta.id }}/restore"
+                  class="btn btn-success"
+                  title="Restore"
+                >
+                  <i class="lni lni-reload"></i>
+                </a>
+                {% endif %}
+                <a
+                  href="/sessions/{{ meta.id }}/replay"
+                  class="btn btn-info"
+                  title="Replay"
+                >
+                  <i class="lni lni-play"></i>
+                </a>
+                <a
+                  href="/sessions/{{ meta.id }}/export"
+                  target="_blank"
+                  class="btn btn-warning"
+                  title="Export"
+                >
+                  <i class="lni lni-download-1"></i>
+                </a>
+                <button
+                  hx-delete="/sessions/{{ meta.id }}"
+                  hx-target="closest tr"
+                  hx-swap="outerHTML"
+                  hx-confirm="Delete this session?"
+                  class="btn btn-error"
+                  title="Delete"
+                >
+                  <i class="lni lni-trash-3"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

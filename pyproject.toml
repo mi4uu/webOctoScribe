@@ -1,0 +1,14 @@
+[project]
+name = "weboctoscribe"
+version = "0.1.0"
+description = "Web Browser Annotation Tool"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "minijinja>=2.6.0",
+    "playwright>=1.49.0",
+]
+
+[dependency-groups]
+dev = []

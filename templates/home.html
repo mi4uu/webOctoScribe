@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-center">
+  <img src="/logo.png" alt="WebOctoScribe" class="home-logo" />
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header">
+        <h1 class="card-title">Pick a website and write a prompt</h1>
+      </div>
+      <form hx-post="/sessions" hx-indicator="#start-loading" class="home-form">
+        <div class="form-group">
+          <label class="form-label">Website</label>
+          <input
+            type="text"
+            name="url"
+            value="lipinski.work"
+            placeholder="e.g. lipinski.work"
+            class="form-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Prompt</label>
+          <textarea
+            name="prompt"
+            placeholder="What task should be performed on this website?"
+            class="form-textarea"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <span id="start-loading" class="spinner htmx-indicator"></span>
+          Start
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
